@@ -1,0 +1,41 @@
+<h1>Purchase Form</h1>
+<form #form='ngForm' (ngSubmit)="onSubmit()">
+  <div>
+    <label>
+      <span>Name</span>
+      <input [(ngModel)]="formModel.firstName" name="firstName" type="text">
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Family Name</span>
+      <input [(ngModel)]="formModel.familyName" name="familyName" type="text">
+    </label>
+  </div>
+  <div>
+    <label>
+      <span>Age</span>
+      <input [(ngModel)]="formModel.age" name="age" type="number">
+    </label>
+  </div>
+
+  <div ngModelGroup="password">
+    <div>
+      <label>
+        <span>password</span>
+        <input [(ngModel)]="formModel.password.password"  name='password' type="password">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        <span>Confirm password</span>
+        <input  [(ngModel)]="formModel.password.confirmPassword"  name='password'  type="confirmPassword">
+      </label>
+    </div>
+  </div>
+  <button>Submit</button>
+</form>
+
+
+<pre>{{formModel | json}}</pre>
