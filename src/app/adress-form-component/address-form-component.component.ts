@@ -15,6 +15,6 @@ import {ControlContainer, FormsModule, NgForm} from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddressFormComponentComponent {
-  @Input({required: true}) form!: AddressFormModelEntity;
+  @Input({required: true}) form?: AddressFormModelEntity | null;
 }
 
