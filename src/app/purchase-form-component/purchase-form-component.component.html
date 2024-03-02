@@ -1,21 +1,21 @@
 <h1>Purchase Form</h1>
-<form #form='ngForm' (ngSubmit)="onSubmit()">
+<form appForm  (formValueChange)="onFormValueChange($event)" (ngSubmit)="onSubmit()">
   <div>
     <label>
       <span>Name</span>
-      <input [(ngModel)]="formModel.firstName" name="firstName" type="text">
+      <input [ngModel]="vm.formModel.firstName" name="firstName" type="text">
     </label>
   </div>
   <div>
     <label>
       <span>Family Name</span>
-      <input [(ngModel)]="formModel.familyName" name="familyName" type="text">
+      <input [ngModel]="vm.formModel.familyName" name="familyName" type="text">
     </label>
   </div>
   <div>
     <label>
       <span>Age</span>
-      <input [(ngModel)]="formModel.age" name="age" type="number">
+      <input [ngModel]="vm.formModel.age" name="age" type="number">
     </label>
   </div>
 
@@ -23,35 +23,34 @@
     <div>
       <label>
         <span>password</span>
-        <input [(ngModel)]="formModel.password.password"  name='password' type="password">
+        <input [ngModel]="vm.formModel.password?.password" name='password' type="password">
       </label>
     </div>
 
     <div>
       <label>
         <span>Confirm password</span>
-        <input  [(ngModel)]="formModel.password.confirmPassword"  name='confirmPassword'  type="text">
+        <input [ngModel]="vm.formModel.password?.confirmPassword" name='confirmPassword' type="text">
       </label>
     </div>
   </div>
 
     <div>
         <label>Gender</label>
-        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="female"/>
-        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="male"/>
-        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="unknown"/>
+        <input [disabled] = "vm.isGenderDisabled" [ngModel]="vm.formModel.gender" type="radio" name="gender" value="female"/>
+        <input [disabled] = "vm.isGenderDisabled" [ngModel]="vm.formModel.gender" type="radio" name="gender" value="male"/>
+        <input [disabled] = "vm.isGenderDisabled" [ngModel]="vm.formModel.gender" type="radio" name="gender" value="unknown"/>
     </div>
 
     <div ngModelGroup="addresses">
-        <app-address-form-component [form]="formModel.address"></app-address-form-component>
-
+        <app-address-form-component [form]="vm.formModel.address"></app-address-form-component>
     </div>
 
 
     <div>
         <label>
             <span>Product</span>
-            <select name="productId" [(ngModel)]="formModel.productId">
+            <select name="productId" [ngModel]="vm.formModel.productId">
                 @for ( product of products; track product.id) {
                     <option [value]="product.id">{{product.name}}</option>
                 }
@@ -62,4 +61,4 @@
 </form>
 
 
-<pre>{{formModel | json}}</pre>
+<pre>{{vm.formModel | json}}</pre>
