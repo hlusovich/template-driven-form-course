@@ -30,10 +30,34 @@
     <div>
       <label>
         <span>Confirm password</span>
-        <input  [(ngModel)]="formModel.password.confirmPassword"  name='password'  type="confirmPassword">
+        <input  [(ngModel)]="formModel.password.confirmPassword"  name='confirmPassword'  type="text">
       </label>
     </div>
   </div>
+
+    <div>
+        <label>Gender</label>
+        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="female"/>
+        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="male"/>
+        <input [(ngModel)]="formModel.gender" type="radio" name="gender" value="unknown"/>
+    </div>
+
+    <div ngModelGroup="addresses">
+        <app-address-form-component [form]="formModel.address"></app-address-form-component>
+
+    </div>
+
+
+    <div>
+        <label>
+            <span>Product</span>
+            <select name="productId" [(ngModel)]="formModel.productId">
+                @for ( product of products; track product.id) {
+                    <option [value]="product.id">{{product.name}}</option>
+                }
+            </select>
+        </label>
+    </div>
   <button>Submit</button>
 </form>
 
