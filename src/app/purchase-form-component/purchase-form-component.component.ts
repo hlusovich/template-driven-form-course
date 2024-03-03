@@ -7,10 +7,9 @@ import {
   signal,
   ViewChild
 } from '@angular/core';
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
 import {AddressFormComponentComponent} from "../adress-form-component/address-form-component.component";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {PurchaseFormModelEntity} from "./entity/purchase-form-model.entity";
 import {FormDirective} from "../directives/form/form.directive";
 
@@ -28,6 +27,7 @@ export class PurchaseFormComponentComponent {
     return {
       formModel: this.formValue(),
       isGenderDisabled: (this.formValue().age ?? 0) < 18,
+      isUnknownGender: this.formValue().gender === 'unknown',
     }
   })
 
