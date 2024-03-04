@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  DestroyRef,
+  DestroyRef, effect,
   signal,
   ViewChild
 } from '@angular/core';
@@ -41,8 +41,19 @@ export class PurchaseFormComponentComponent {
     {id: 3, name: 'coca-cola'},
   ];
 
+  constructor() {
+    const firstName = computed(() => this.formValue().firstName);
+    const secondName = computed(() => this.formValue().familyName);
+
+    effect(() => {
+      if(firstName() === 'Mikita' && secondName() === 'Klusovich') {
+        this.formValue().age = 28;
+      }
+
+    }, {allowSignalWrites: true});
+  }
+
   protected onFormValueChange( formValue : PurchaseFormModelEntity) {
-    console.log('formValue');
     this.formValue.set(formValue);
   }
 
