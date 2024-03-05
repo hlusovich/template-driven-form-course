@@ -1,14 +1,15 @@
 import {AddressFormModelEntity} from "../../adress-form-component/model/address-form-model.entity";
 
 export interface PurchaseFormModelEntity {
-  firstName?: String,
-  familyName?: String,
+  firstName?: string,
+  familyName?: string,
   age?: number,
   password?: {
-    password?: String,
-    confirmPassword?: String,
+    password?: string,
+    confirmPassword?: string,
   },
-  gender?: String,
+  customGender?:string,
+  gender?: string,
   productId?: number,
   address?: AddressFormModelEntity,
 }

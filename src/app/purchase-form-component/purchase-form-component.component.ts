@@ -3,14 +3,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  DestroyRef,
+  DestroyRef, effect,
   signal,
   ViewChild
 } from '@angular/core';
-import {FormsModule, NgForm} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
 import {AddressFormComponentComponent} from "../adress-form-component/address-form-component.component";
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {PurchaseFormModelEntity} from "./entity/purchase-form-model.entity";
 import {FormDirective} from "../directives/form/form.directive";
 
@@ -28,6 +27,7 @@ export class PurchaseFormComponentComponent {
     return {
       formModel: this.formValue(),
       isGenderDisabled: (this.formValue().age ?? 0) < 18,
+      isUnknownGender: this.formValue().gender === 'unknown',
     }
   })
 
@@ -41,8 +41,19 @@ export class PurchaseFormComponentComponent {
     {id: 3, name: 'coca-cola'},
   ];
 
+  constructor() {
+    const firstName = computed(() => this.formValue().firstName);
+    const secondName = computed(() => this.formValue().familyName);
+
+    effect(() => {
+      if(firstName() === 'Mikita' && secondName() === 'Klusovich') {
+        this.formValue().age = 28;
+      }
+
+    }, {allowSignalWrites: true});
+  }
+
   protected onFormValueChange( formValue : PurchaseFormModelEntity) {
-    console.log('formValue');
     this.formValue.set(formValue);
   }
 
